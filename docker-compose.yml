@@ -1,27 +1,32 @@
 services:
-  db:
-    image: postgres:latest
+  postgresdb:
+    image: postgres:17.0
     environment:
       POSTGRES_DB: myapp_db
       POSTGRES_USER: myapp_user
       POSTGRES_PASSWORD: myapp_password
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - /var/lib/postgresql/data
 
-  web:
+#  mysqldb:
+#    image: mysql:8.4.2
+#    environment:
+#      MYSQL_DATABASE: myapp_db
+#      MYSQL_USER: myapp_user
+#      MYSQL_PASSWORD: myapp_password
+#    volumes:
+#      - /var/lib/mysql/data
+
+  djangowebapp:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/app
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      - "postgresdb"
     environment:
-      - DJANGO_DB_HOST=db
-      - DJANGO_DB_NAME=myapp_db
-      - DJANGO_DB_USER=myapp_user
-      - DJANGO_DB_PASSWORD=myapp_password
+      - DB_HOST=db
+      - DB_NAME=myapp_db
+      - DB_USER=myapp_user
+      - DB_PASSWORD=myapp_password
+      - DB_ENGINE=django.db.backends.postgresql
 
-volumes:
-  postgres_data:
