@@ -1,5 +1,18 @@
 services:
-  postgresdb:
+  wapp:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=myapp_db
+      - DB_USER=myapp_user
+      - DB_PASSWORD=myapp_password
+      - DB_ENGINE=django.db.backends.postgresql
+    depends_on:
+      - db
+
+  db:
     image: postgres:17.0
     environment:
       POSTGRES_DB: myapp_db
@@ -7,26 +20,3 @@ services:
       POSTGRES_PASSWORD: myapp_password
     volumes:
       - /var/lib/postgresql/data
-
-#  mysqldb:
-#    image: mysql:8.4.2
-#    environment:
-#      MYSQL_DATABASE: myapp_db
-#      MYSQL_USER: myapp_user
-#      MYSQL_PASSWORD: myapp_password
-#    volumes:
-#      - /var/lib/mysql/data
-
-  djangowebapp:
-    build: .
-    ports:
-      - "8000:8000"
-    depends_on:
-      - "postgresdb"
-    environment:
-      - DB_HOST=db
-      - DB_NAME=myapp_db
-      - DB_USER=myapp_user
-      - DB_PASSWORD=myapp_password
-      - DB_ENGINE=django.db.backends.postgresql
-

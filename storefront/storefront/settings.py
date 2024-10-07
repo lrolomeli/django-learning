@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-n0s$bp5)e!2(a86l2$h*3i4@vzit$6r-c==j=b^ck9oxw35m)2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'playground',
@@ -84,18 +85,18 @@ WSGI_APPLICATION = 'storefront.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 # Get the username and password from environment variables
-DB_USERNAME = os.environ.get('DB_USERNAME')
+DB_USER = os.environ.get('DB_USER')
 DB_PASSWORD = os.environ.get('DB_PASSWORD')
-DB_HOST = os.environ.get('DB_HOST')
 DB_NAME = os.environ.get('DB_NAME')
+DB_HOST = os.environ.get('DB_HOST')
 DB_ENGINE = os.environ.get('DB_ENGINE')
 
 DATABASES = {
     'default': {
         'ENGINE': DB_ENGINE,
         'NAME': DB_NAME,
-        'USER': DB_USERNAME,
-        'PASSWORD': DB_USERNAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,
         'PORT': 5432,
     }
