@@ -1,3 +1,36 @@
-*/__pycache__/
-*.cpython
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environments
+.env
+.venv/
 venv/
+ENV/
+env/
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.sqlite3
+
+# Media and static files
+media/
+staticfiles/

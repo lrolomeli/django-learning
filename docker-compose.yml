@@ -9,6 +9,8 @@ services:
       - DB_USER=myapp_user
       - DB_PASSWORD=myapp_password
       - DB_ENGINE=django.db.backends.postgresql
+    volumes:
+      - ./storefront:/app
     depends_on:
       - db
 
